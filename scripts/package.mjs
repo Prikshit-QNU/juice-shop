@@ -118,7 +118,7 @@ for (const file of await fs.readdir('dist')) {
   const filePath = path.join('dist', file)
   if (!(await fs.stat(filePath)).isFile()) continue
   const content = await fs.readFile(filePath)
-  const hash = crypto.createHash('md5').update(content).digest('hex')
+  const hash = crypto.createHash('sha256').update(content).digest('hex')
   const hashFile = `${filePath}.md5`
   await fs.writeFile(hashFile, hash)
   console.log(`Checksum ${hash} written to ${hashFile}`)
